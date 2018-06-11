@@ -1,0 +1,33 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.hieu.zk_example.MyViewModel')"
+		validationMessages="@id('vmsgs')" width="600px" vflex="1">
+		
+		<hbox align="center">
+			Keyword:
+			<textbox value="@bind(vm.keyword)" />
+			<button label="Search" image="/widgets/getting_started/img/search.png" onClick="@command('search')" />
+		</hbox>
+		
+		<listbox height="400px" model="@bind(vm.logListModel)" emptyMessage="No category found in the result"
+		selectedItem="@bind(vm.select)" style="margin-top:10px">
+			<listhead>
+				<listheader label="ID" />
+				<listheader label="Name" />
+				<listheader label="Feature" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@bind(each.id)"></listcell>
+					<listcell label="@bind(each.name)"></listcell>
+					<listcell>
+	                    <button label="delete" onClick="@command('delete', cat=each)" />
+	                    <button label="edit" onClick="@command('delete', cat=each)" />
+	                </listcell>
+	                
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+	
+</zk>
