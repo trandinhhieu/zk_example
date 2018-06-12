@@ -8,8 +8,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.ListModel;
-import org.zkoss.zul.ListModelList;
 
 import com.hieu.zk_example.entity.Category;
 import com.hieu.zk_example.services.MyService;
@@ -19,17 +17,16 @@ public class MyViewModel {
 
 	@WireVariable
 	private MyService myService;
-	private ListModelList<Category> logListModel;
+	private List<Category> logListModel;
 	private Category select;
 	private String keyword;
 
 	@Init
 	public void init() {
-		List<Category> logList = myService.getList();
-		logListModel = new ListModelList<Category>(logList);
+		logListModel = myService.getList();
 	}
 
-	public ListModel<Category> getLogListModel() {
+	public List<Category> getLogListModel() {
 		return logListModel;
 	}
 
@@ -64,6 +61,12 @@ public class MyViewModel {
 //	}
 //
 	@Command
+	@NotifyChange("logListModel")
+	public void searchAll() {
+		logListModel = myService.getList();
+	}
+	
+	@Command
 	public void delete(@BindingParam("cat") Category cat) {
 		myService.delete(cat);
 		logListModel.remove(cat);
@@ -72,7 +75,7 @@ public class MyViewModel {
 	@Command
 	@NotifyChange("logListModel")
 	public void search(){
-		select = myService.search(keyword);
+		logListModel = myService.search(keyword);
 	}
 
 }

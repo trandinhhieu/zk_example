@@ -1,5 +1,6 @@
 package com.hieu.zk_example.services.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -46,8 +47,19 @@ public class CategoryDao {
 	}
 
 	@Transactional(readOnly = true)
-	public Category search(String keyword) {
-		return em.find(Category.class, keyword);
+	public List<Category> search(String keyword) {
+		List<Category> list = queryAll();
+		List<Category> result = new LinkedList<Category>();
+		if (keyword==null || "".equals(keyword)) {
+			result = list;
+		}else {
+			for (Category category : list) {
+				if (category.getName().toLowerCase().contains(keyword.toLowerCase())) {
+					result.add(category);
+				}
+			}
+		}
+		return result;
 	}
 
 }

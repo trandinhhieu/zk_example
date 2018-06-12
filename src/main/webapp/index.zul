@@ -7,24 +7,24 @@
 			Keyword:
 			<textbox value="@bind(vm.keyword)" />
 			<button label="Search" image="/widgets/getting_started/img/search.png" onClick="@command('search')" />
+			<button label="All" image="/widgets/getting_started/img/search.png" onClick="@command('searchAll')" />
 		</hbox>
 		
-		<listbox height="400px" model="@bind(vm.logListModel)" emptyMessage="No category found in the result"
-		selectedItem="@bind(vm.select)" style="margin-top:10px">
-			<listhead>
+		<listbox height="auto" model="@bind(vm.logListModel)" emptyMessage="No category found in the result"
+		selectedItem="@bind(vm.select)" style="margin-top:10px; border: 1px black solid; text-align: center;">
+			<listhead style="border: 1px black solid;">
 				<listheader label="ID" />
 				<listheader label="Name" />
 				<listheader label="Feature" />
 			</listhead>
-			<template name="model">
+			<template name="model"  style="border: 1px black solid;">
 				<listitem>
 					<listcell label="@bind(each.id)"></listcell>
 					<listcell label="@bind(each.name)"></listcell>
 					<listcell>
-	                    <button label="delete" onClick="@command('delete', cat=each)" />
-	                    <button label="edit" onClick="@command('delete', cat=each)" />
+	                    <button label="Delete" style="font-size: 12px; font-weight: 600;" onClick="@command('delete', cat=each)" />
+	                    <button label="Edit" style="font-size: 12px; font-weight: 600;" onClick="@command('delete', cat=each)" />
 	                </listcell>
-	                
 				</listitem>
 			</template>
 		</listbox>

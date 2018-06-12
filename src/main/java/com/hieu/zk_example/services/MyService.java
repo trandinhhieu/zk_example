@@ -12,5 +12,5 @@ public interface MyService {
 
 	void delete(Category cat);
 
-	Category search(String keyword);
+	List<Category> search(String keyword);
 }

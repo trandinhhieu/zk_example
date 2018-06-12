@@ -30,7 +30,7 @@ public class MyServiceImpl implements MyService {
 		dao.delete(cat);
 	}
 
-	public Category search(String keyword) {
+	public List<Category> search(String keyword) {
 		return dao.search(keyword);
 	}
 	
